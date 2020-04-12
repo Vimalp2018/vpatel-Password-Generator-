@@ -10,71 +10,58 @@ function writePassword() {
 
 }
 
+var lowercase = "abcdefghijklmnopqrstuvwxyz"
+var uppercase = lowercase.toUpperCase
+var numbers = "1234567890"
+var special = "!@#$%^&*()<>?/{}[]:;'"
+
+
 function generatePassword() {
 
- var Passwordlength = parseInt(prompt("What length would you like for your password?"));
-        if (Passwordlength < 8 || Passwordlength > 128)
-         {
-        alert("Please try again password must be more than 8 characters and less than 128 characters");
-        }
-        else 
-        {
-         var lowercaseAZ = confirm("Do you want lowercase letters in your password?");
-         var uppercaseAZ = confirm("Do you want uppercase letters in your password?");
-         var numbers = confirm("Do you want numbers in your password?")
-         var specialC = confirm("Do you want special characters in your password?")
-        }
+  var passwordLength = parseInt(prompt("What length would you like for your password?"));
+  if (passwordLength < 8 || passwordLength > 128) {
+    alert("Please try again password must be more than 8 characters and less than 128 characters");
+    return
+  }
 
-        if (lowercaseAZ == false && uppercaseAZ == false && numbers == false && specialC == false) {
-        alert("sorry try again at lease one character must be selected");
-        }
+    var confirmLowercase = confirm("Do you want lowercase letters in your password?");
+    var confirmUppercase = confirm("Do you want uppercase letters in your password?");
+    var confirmNumbers = confirm("Do you want numbers in your password?")
+    var confirmSpecial = confirm("Do you want special characters in your password?")
+  
 
-        if (lowercaseAZ == true) {
-        characters.push(lowercaseAZcharacters)
-        }
-
-        if (uppercaseAZ == true) {
-        characters.push(uppercaseAZcharacters)
-        }
-
-        if (numbers == true) {
-        characters.push(numberscharacters)
-        }
-        if (specialC == true) {
-        characters.push(specialCcharacters)
-        }
-
-var characters = [];
-var lowercaseAZcharacters = ("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z");
-var uppercaseAZcharacters = ("A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","W","X","Y","Z");
-var numberscharacters = ("1","2","3","4","5","6","7","8","9","0")
-var specialCcharacters = ("!","@","#","$","%","^","&","*","(",")","{","}","|","[","]",";","'",":","<",">","?","/");
-
-var passwordText = ""  
-
-    for (var i = 0; i < Passwordlength.length; i++) {
-
-      passwordText = passwordText + characters[Math.floor(Math.random() * Passwordlength.length) ]
-
-}
-      
-return passwordText;
+  if (!confirmLowercase  && !confirmUppercase  && !confirmNumbers  && !confirmSpecial ) {
+    alert("sorry try again at lease one character must be selected");
+    return
+  }
 
 
+  var characters = ""
 
+  if (confirmLowercase) {
+    characters+=lowercase;
+  }
+  if (confirmUppercase) {
+    characters+=uppercase;
+  }
+  if (confirmNumbers) {
+    characters+=numbers;
+  }
+  if (confirmSpecial) {
+    characters+=special;
+  }
+  console.log(characters)
+  var randomPassword = ""
 
+  for (i = 1; i <= passwordLength; i++) {
 
+    randomPassword += characters[Math.floor(Math.random() * characters.length)];
+  }
+
+  return randomPassword
 
 
 }
-
-
-
-
-
-
-
-
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
